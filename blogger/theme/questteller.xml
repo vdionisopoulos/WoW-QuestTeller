@@ -2672,7 +2672,9 @@ margin-left:40px
 
   --qt-border: rgba(255, 255, 255, 0.09);
 
-  --qt-reading-width: 800px;
+  --qt-reading-width: 760px;
+  --qt-chapter-width: 980px;
+  --qt-art-width: 900px;
   --qt-site-width: 1180px;
 
   --qt-radius: 8px;
@@ -3438,6 +3440,586 @@ body:not(.item-view) #page_body {
 
   .qt-chapter-card-content {
     padding: 24px 22px 28px;
+  }
+
+}
+
+/* =========================================================
+   QUESTTELLER CHAPTER READING EXPERIENCE
+   ========================================================= */
+
+
+/* ---------- Remove Blogger card treatment ---------- */
+
+body.item-view .Blog .blog-posts .post-outer-container {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+body.item-view .Blog .post-outer {
+  max-width: none;
+}
+
+
+/* ---------- Chapter shell ---------- */
+
+.qt-single-post {
+  width: 100%;
+}
+
+.qt-chapter-header {
+  max-width: 900px;
+  margin: 48px auto 56px;
+  text-align: center;
+}
+
+.qt-chapter-kicker {
+  margin-bottom: 18px;
+
+  color: var(--qt-gold);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+/* ---------- Main chapter title ---------- */
+
+body.item-view .qt-chapter-header .post-title {
+  float: none;
+
+  max-width: none;
+  margin: 0;
+
+  color: var(--qt-heading);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  font-weight: 750;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
+}
+
+body.item-view .qt-chapter-header .post-title a,
+body.item-view .qt-chapter-header .post-title a:visited {
+  color: inherit;
+}
+
+
+/* ---------- Metadata ---------- */
+
+.qt-chapter-meta {
+  margin-top: 22px;
+
+  color: var(--qt-text-muted);
+
+  font-size: 11px;
+
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+
+/* ---------- Reading column ---------- */
+
+.qt-chapter-reading {
+  width: 100%;
+  max-width: var(--qt-chapter-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.qt-chapter-reading .post-body {
+  max-width: var(--qt-reading-width);
+
+  margin: 0 auto;
+
+  color: var(--qt-text);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 19px;
+  line-height: 1.9;
+}
+
+.qt-chapter-reading .post-body p {
+  margin: 0 0 1.65em;
+}
+
+
+/* ---------- First paragraph ---------- */
+
+.qt-chapter-reading .post-body > p:first-of-type::first-letter {
+  float: left;
+
+  margin: 0.08em 0.12em 0 0;
+
+  color: var(--qt-gold);
+
+  font-family: Georgia, serif;
+  font-size: 4.2em;
+  line-height: 0.78;
+}
+
+
+/* ---------- Scene headings ---------- */
+
+.qt-chapter-reading h2 {
+  margin: 4.5rem 0 1.5rem;
+
+  color: var(--qt-heading);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  line-height: 1.1;
+
+  letter-spacing: -0.025em;
+}
+
+.qt-chapter-reading h3 {
+  margin: 3rem 0 1rem;
+
+  color: var(--qt-gold);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   QUESTTELLER STORY ART
+   ========================================================= */
+
+.qt-art {
+  width: min(var(--qt-art-width), calc(100vw - 48px));
+
+  margin-top: 3.5rem;
+  margin-right: 0;
+  margin-bottom: 3.5rem;
+  margin-left: 50%;
+
+  transform: translateX(-50%);
+
+  text-align: center;
+}
+
+.qt-art img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  border: 1px solid var(--qt-border);
+  border-radius: 6px;
+}
+
+.qt-art figcaption {
+  max-width: 720px;
+
+  margin: 12px auto 0;
+
+  color: var(--qt-text-muted);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* ---------- Wide image ---------- */
+
+.qt-art-wide {
+  width: min(var(--qt-art-width), calc(100vw - 48px));
+}
+
+
+/* ---------- Cinematic full width ---------- */
+
+.qt-art-full {
+  width: min(1180px, calc(100vw - 32px));
+}
+
+.qt-art-full img {
+  border-radius: 0;
+}
+
+
+/* ---------- Dramatic quote ---------- */
+
+.qt-quote {
+  max-width: 680px;
+
+  margin: 4.5rem auto;
+
+  padding: 34px 38px;
+
+  border-top: 1px solid rgba(197, 155, 82, 0.35);
+  border-bottom: 1px solid rgba(197, 155, 82, 0.35);
+
+  color: var(--qt-heading);
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(1.45rem, 3vw, 2.1rem);
+  font-style: italic;
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+
+/* ---------- Location ---------- */
+
+.qt-location {
+  margin: 4rem 0 1.5rem;
+
+  color: var(--qt-gold);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+
+/* ---------- Divider ---------- */
+
+.qt-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+
+  margin: 4.5rem auto;
+
+  color: var(--qt-gold);
+}
+
+.qt-divider::before,
+.qt-divider::after {
+  content: "";
+
+  display: block;
+
+  width: 100px;
+  height: 1px;
+
+  background: var(--qt-border);
+}
+
+
+/* ---------- Chapter footer ---------- */
+
+.qt-chapter-footer {
+  max-width: var(--qt-reading-width);
+
+  margin: 72px auto 0;
+
+  padding-top: 32px;
+
+  border-top: 1px solid var(--qt-border);
+}
+
+
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 700px) {
+
+  .qt-chapter-header {
+    margin: 32px auto 40px;
+    padding: 0 10px;
+  }
+
+  body.item-view .qt-chapter-header .post-title {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+  }
+
+  .qt-chapter-reading .post-body {
+    padding: 0 10px;
+
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  .qt-art {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .qt-art-wide,
+  .qt-art-full {
+    width: 100vw;
+  }
+
+  .qt-art img {
+    border-radius: 0;
+  }
+
+  .qt-quote {
+    margin: 3rem 10px;
+    padding: 26px 18px;
+  }
+
+}
+
+
+/* =========================================================
+   QUESTTELLER CHAPTER POLISH v0.2
+   Balanced art, integrated footer, separate feature source
+   ========================================================= */
+
+/* ---------- Hidden source used only for Blogger featured image ---------- */
+
+.qt-featured-source {
+  display: none !important;
+}
+
+
+/* ---------- Keep the chapter on one coherent editorial grid ---------- */
+
+body.item-view .qt-single-post {
+  max-width: var(--qt-chapter-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.item-view .qt-chapter-header {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--qt-chapter-width);
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+body.item-view .qt-chapter-reading .post-body {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+
+/* ---------- Single-post labels / share footer ---------- */
+
+body.item-view .qt-chapter-footer {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--qt-reading-width);
+}
+
+body.item-view .qt-chapter-footer .post-bottom {
+  gap: 12px;
+}
+
+body.item-view .qt-chapter-footer .post-footer {
+  color: var(--qt-text-muted);
+}
+
+body.item-view .qt-chapter-footer .byline.post-labels {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+body.item-view .byline.post-labels a {
+  margin: 4px 6px 4px 0;
+  padding: 5px 10px;
+
+  background: var(--qt-surface);
+  border: 1px solid var(--qt-border);
+  border-radius: 999px;
+
+  color: var(--qt-text-muted);
+
+  font-size: 11px;
+  line-height: 1.4;
+
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+body.item-view .byline.post-labels a:hover {
+  color: var(--qt-gold);
+  border-color: rgba(197, 155, 82, 0.35);
+  background: var(--qt-surface-raised);
+}
+
+
+/* ---------- Comments: keep Blogger, visually integrate it ---------- */
+
+body.item-view #comments {
+  box-sizing: border-box;
+
+  width: 100%;
+  max-width: var(--qt-reading-width);
+
+  margin: 52px auto 0;
+  padding: 32px 0 0;
+
+  background: transparent;
+
+  border-top: 1px solid var(--qt-border);
+}
+
+body.item-view #comments .comments-content,
+body.item-view #comments .comment-form,
+body.item-view #comments .comment-footer {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+body.item-view #comments .comment-form {
+  overflow: hidden;
+
+  margin-top: 18px;
+  padding: 0;
+
+  background: var(--qt-surface);
+  border: 1px solid var(--qt-border);
+  border-radius: var(--qt-radius);
+}
+
+body.item-view #comment-editor {
+  display: block;
+
+  width: 100% !important;
+  margin: 0;
+
+  background: var(--qt-surface);
+
+  /*
+   * Blogger owns the contents of this cross-origin iframe.
+   * This dark-mode filter keeps the embedded sign-in form from
+   * appearing as a bright white panel inside the QuestTeller UI.
+   */
+  filter: invert(1) hue-rotate(180deg);
+}
+
+
+/* ---------- Remove the legacy Popular Posts block from chapters ---------- */
+
+body.item-view .PopularPosts {
+  display: none !important;
+}
+
+
+/* ---------- Site footer ---------- */
+
+#footer {
+  box-sizing: border-box;
+
+  width: 100%;
+  max-width: var(--qt-site-width);
+
+  margin: 72px auto 0;
+  padding: 34px 24px 12px;
+
+  background: transparent;
+  border-top: 1px solid var(--qt-border);
+
+  color: var(--qt-text-muted);
+
+  text-align: center;
+}
+
+#footer .widget-content {
+  margin: 0 auto;
+}
+
+#footer .Attribution,
+#footer .Attribution .widget-content,
+#footer .Attribution .blogger {
+  color: var(--qt-text-muted);
+}
+
+#footer a,
+#footer a:visited {
+  color: var(--qt-text-muted);
+}
+
+#footer a:hover {
+  color: var(--qt-gold);
+}
+
+#footer .blogger {
+  opacity: 0.72;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+
+/* ---------- Mobile polish ---------- */
+
+@media screen and (max-width: 700px) {
+
+  :root {
+    --qt-reading-width: 100%;
+    --qt-chapter-width: 100%;
+    --qt-art-width: 100%;
+  }
+
+  body.item-view .qt-single-post {
+    width: 100%;
+  }
+
+  body.item-view .qt-chapter-header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .qt-chapter-reading .post-body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .qt-art,
+  .qt-art-wide,
+  .qt-art-full {
+    width: calc(100vw - 24px);
+  }
+
+  body.item-view #comments,
+  body.item-view .qt-chapter-footer {
+    width: calc(100% - 32px);
+  }
+
+  #footer {
+    margin-top: 48px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
 }
@@ -4395,13 +4977,32 @@ body:not(.item-view) #page_body {
 
   <b:if cond='data:view.isSingleItem'>
 
-    <!-- Full chapter page -->
-    <div class='post qt-single-post'>
-      <b:include data='post' name='postTitle'/>
-      <b:include name='headerByline'/>
-      <b:include data='post' name='postBody'/>
-      <b:include data='post' name='postFooter'/>
+<!-- Full QuestTeller chapter page -->
+<article class='post qt-single-post'>
+
+  <header class='qt-chapter-header'>
+
+    <div class='qt-chapter-kicker'>
+      The Forsaken Chronicles
     </div>
+
+    <b:include data='post' name='postTitle'/>
+
+    <div class='qt-chapter-meta'>
+      <b:include name='headerByline'/>
+    </div>
+
+  </header>
+
+  <div class='qt-chapter-reading'>
+    <b:include data='post' name='postBody'/>
+  </div>
+
+  <footer class='qt-chapter-footer'>
+    <b:include data='post' name='postFooter'/>
+  </footer>
+
+</article>
 
   <b:else/>
 
