@@ -2736,7 +2736,7 @@ body .sticky {
   box-sizing: border-box;
   max-width: var(--qt-site-width);
   margin: 0 auto;
-  padding: 0 24px 72px;
+  padding: 32px 24px 72px;
 }
 
 
@@ -2895,6 +2895,192 @@ body.item-view .post-title {
     line-height: 1.75;
   }
 
+}
+/* =========================================================
+   QUESTTELLER HEADER
+   ========================================================= */
+
+.qt-site-header {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 15, 18, 0.98) 0%,
+      rgba(8, 10, 12, 0.98) 100%
+    );
+  border-bottom: 1px solid var(--qt-border);
+}
+
+.qt-header-inner {
+  box-sizing: border-box;
+  max-width: var(--qt-site-width);
+  min-height: 86px;
+  margin: 0 auto;
+  padding: 14px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+
+/* ---------- Brand ---------- */
+
+.qt-brand,
+.qt-brand:hover,
+.qt-brand:visited {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  color: var(--qt-heading);
+  text-decoration: none;
+}
+
+.qt-brand-mark {
+  display: grid;
+  place-items: center;
+
+  width: 46px;
+  height: 46px;
+
+  border: 1px solid rgba(197, 155, 82, 0.55);
+  border-radius: 50%;
+
+  color: var(--qt-gold);
+
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(197, 155, 82, 0.10),
+      transparent 70%
+    );
+
+  box-shadow:
+    0 0 24px rgba(197, 155, 82, 0.07);
+}
+
+.qt-brand-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.qt-brand-name {
+  color: var(--qt-heading);
+
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.qt-brand-tagline {
+  margin-top: 5px;
+
+  color: var(--qt-text-muted);
+
+  font-size: 11px;
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/* ---------- Navigation ---------- */
+
+.qt-main-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qt-main-nav a,
+.qt-main-nav a:visited {
+  position: relative;
+
+  padding: 12px 14px;
+
+  color: var(--qt-text-muted);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.qt-main-nav a:hover {
+  color: var(--qt-heading);
+
+  background: rgba(255, 255, 255, 0.035);
+}
+
+
+/* ---------- Kill old Indie header ---------- */
+
+.qt-site-header > .centered-top {
+  display: none !important;
+}
+
+
+/* ---------- Mobile header ---------- */
+
+@media screen and (max-width: 700px) {
+
+  .qt-header-inner {
+    min-height: auto;
+    padding: 14px 18px;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 14px;
+  }
+
+  .qt-brand {
+    justify-content: center;
+  }
+
+  .qt-main-nav {
+    justify-content: center;
+    border-top: 1px solid var(--qt-border);
+    padding-top: 8px;
+  }
+
+  .qt-main-nav a {
+    flex: 1;
+    text-align: center;
+    padding: 10px 6px;
+  }
+
+}
+
+.blog-name {
+  margin: 0 !important;
+}
+
+.centered-top-placeholder {
+  display: none !important;
+}
+
+body.item-view .blog-name,
+body.item-view .centered-top {
+  margin: 0 !important;
 }
 
 ]]></b:skin>
@@ -3225,8 +3411,38 @@ body.item-view .post-title {
 
           <div class='centered'>
             <div class='centered-top-placeholder'/>
-            <header class='centered-top-container' role='banner'>
-              <div class='centered-top'>
+            <header class='centered-top-container qt-site-header' role='banner'>
+
+  <div class='qt-header-inner'>
+
+    <a class='qt-brand' expr:href='data:blog.homepageUrl'>
+      <span class='qt-brand-mark'>Q</span>
+
+      <span class='qt-brand-copy'>
+        <span class='qt-brand-name'>QuestTeller</span>
+        <span class='qt-brand-tagline'>Every quest has a story.</span>
+      </span>
+    </a>
+
+    <nav class='qt-main-nav' aria-label='Primary navigation'>
+
+      <a expr:href='data:blog.homepageUrl'>
+        Home
+      </a>
+
+      <a expr:href='data:blog.homepageUrl + &quot;search/label/Story&quot;'>
+        Chronicles
+      </a>
+
+      <a expr:href='data:blog.homepageUrl + &quot;search/label/Gameplay&quot;'>
+        Gameplay
+      </a>
+
+    </nav>
+
+  </div>
+
+  <div class='centered-top'>
                 <b:class cond='data:view.isSearch and data:view.search.query' name='search-focused'/>
 
                 <b:if cond='data:view.isSingleItem'>
