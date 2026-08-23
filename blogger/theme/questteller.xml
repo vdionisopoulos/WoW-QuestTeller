@@ -2652,6 +2652,251 @@ body.collapsed-header.item-view .centered-top-container .blog-name{
 margin-left:40px
 }
 }
+/* =========================================================
+   QUESTTELLER
+   Foundation Overrides v0.1
+   ========================================================= */
+
+:root {
+  --qt-bg: #080a0c;
+  --qt-surface: #101419;
+  --qt-surface-raised: #151a20;
+
+  --qt-text: #d8d3c7;
+  --qt-text-muted: #8e918e;
+  --qt-heading: #f0eadc;
+
+  --qt-gold: #c59b52;
+  --qt-plague: #7b9f58;
+  --qt-undead: #667f8c;
+
+  --qt-border: rgba(255, 255, 255, 0.09);
+
+  --qt-reading-width: 800px;
+  --qt-site-width: 1180px;
+
+  --qt-radius: 8px;
+}
+
+
+/* ---------- Base ---------- */
+
+html {
+  background: var(--qt-bg);
+}
+
+body {
+  background: var(--qt-bg);
+  color: var(--qt-text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+
+/* ---------- Remove legacy Indie background ---------- */
+
+.bg-photo-container,
+.bg-photo-overlay {
+  display: none !important;
+}
+
+
+/* ---------- Remove legacy sidebar layout ---------- */
+
+.sidebar-container {
+  display: none !important;
+}
+
+.vertical-ad-container {
+  display: none !important;
+}
+
+body .page_body {
+  margin-left: 0 !important;
+}
+
+body .sticky {
+  padding-left: 0 !important;
+}
+
+
+/* ---------- Main application shell ---------- */
+
+.page_body {
+  background: var(--qt-bg);
+}
+
+.page_body .centered {
+  box-sizing: border-box;
+  max-width: var(--qt-site-width);
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+
+
+/* ---------- Header ---------- */
+
+.centered-top-container {
+  background: rgba(8, 10, 12, 0.96);
+  border-bottom: 1px solid var(--qt-border);
+  box-shadow: none;
+}
+
+.centered-top {
+  max-width: var(--qt-site-width);
+  margin: 0 auto;
+}
+
+.Header h1,
+.Header h1 a,
+.Header h1 a:hover,
+.Header h1 a:visited {
+  color: var(--qt-heading);
+}
+
+.Header p {
+  color: var(--qt-text-muted);
+}
+
+
+/* ---------- Post surfaces ---------- */
+
+#page_body .FeaturedPost,
+.Blog .blog-posts .post-outer-container {
+  background: var(--qt-surface);
+  border: 1px solid var(--qt-border);
+  border-radius: var(--qt-radius);
+  box-shadow: none;
+}
+
+.post-outer-container {
+  margin-bottom: 24px;
+}
+
+
+/* ---------- Post titles ---------- */
+
+.post-title {
+  float: none;
+  max-width: none;
+  color: var(--qt-heading);
+  line-height: 1.15;
+}
+
+.post-title,
+.post-title a,
+.post-title a:hover,
+.post-title a:visited {
+  color: var(--qt-heading);
+}
+
+
+/* ---------- Story body ---------- */
+
+.post-body {
+  color: var(--qt-text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.post-body p {
+  margin: 0 0 1.5em;
+}
+
+.post-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ---------- Single chapter ---------- */
+
+body.item-view .Blog .post-outer {
+  max-width: var(--qt-reading-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.item-view .post-title {
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+
+
+/* ---------- Links ---------- */
+
+.post-body a {
+  color: var(--qt-gold);
+}
+
+.post-body a:visited {
+  color: var(--qt-gold);
+}
+
+.post-body a:hover {
+  color: var(--qt-heading);
+}
+
+
+/* ---------- Labels ---------- */
+
+.Label li,
+.Label span.label-size,
+.byline.post-labels a {
+  background: var(--qt-surface-raised);
+  border: 1px solid var(--qt-border);
+  color: var(--qt-text-muted);
+}
+
+
+/* ---------- Comments ---------- */
+
+#comments {
+  border-top: 1px solid var(--qt-border);
+  color: var(--qt-text);
+}
+
+
+/* ---------- Footer ---------- */
+
+#footer {
+  border-top: 1px solid var(--qt-border);
+  color: var(--qt-text-muted);
+  padding-top: 32px;
+}
+
+
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 800px) {
+
+  .page_body .centered {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  #page_body .FeaturedPost,
+  .Blog .blog-posts .post-outer-container {
+    border-radius: 0;
+  }
+
+  .post-body {
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+}
+
 ]]></b:skin>
 
     <b:template-skin>
