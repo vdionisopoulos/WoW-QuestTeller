@@ -3,3 +3,12 @@ Thumbs.db
 .vscode/
 # Local Chronicle artwork
 content/chronicles/alisander/images/
+# Blogger OAuth credentials/tokens (never commit)
+client_secret*.json
+oauth_client*.json
+token*.json
+.blogger-oauth/
+.env
+
+# Local Python virtual environment
+.venv/

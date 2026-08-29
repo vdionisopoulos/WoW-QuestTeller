@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+printf '%s\n' 'Running QuestTeller pre-push validation...'
+python tools/validate_repo.py

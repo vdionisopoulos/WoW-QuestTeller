@@ -1,0 +1,97 @@
+name: Validate and deploy QuestTeller
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blogger-production
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate QuestTeller source
+        run: python tools/validate_repo.py
+
+      - name: Package validated Blogger theme
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: questteller-theme-${{ github.sha }}
+          path: blogger/theme/questteller.xml
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Theme deployment boundary
+        if: github.event_name != 'pull_request'
+        run: |
+          {
+            echo "### Blogger theme"
+            echo ""
+            echo "The theme XML passed validation and is attached to this run as an artifact."
+            echo "Blogger API v3 does not expose a theme/template write endpoint, so theme upload remains manual."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    name: Deploy Blogger content
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-latest
+    environment: blogger-production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate required secrets
+        shell: bash
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          test -n "$BLOGGER_CLIENT_ID" || { echo "Missing BLOGGER_CLIENT_ID"; exit 1; }
+          test -n "$BLOGGER_CLIENT_SECRET" || { echo "Missing BLOGGER_CLIENT_SECRET"; exit 1; }
+          test -n "$BLOGGER_REFRESH_TOKEN" || { echo "Missing BLOGGER_REFRESH_TOKEN"; exit 1; }
+
+      - name: Deploy changed posts and pages
+        shell: bash
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && -n "$BEFORE_SHA" ]]; then
+            python tools/blogger_deploy.py deploy \
+              --manifest blogger/deploy.json \
+              --changed-from "$BEFORE_SHA"
+          else
+            # Manual workflow dispatch is an explicit full content deployment.
+            python tools/blogger_deploy.py deploy --manifest blogger/deploy.json
+          fi
