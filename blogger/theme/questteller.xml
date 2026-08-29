@@ -6588,8 +6588,8 @@ summary:focus-visible,
 }
 
 /* =========================================================
-   QUESTTELLER v0.9
-   Native Blogger contact form
+   QUESTTELLER v0.11
+   Native Blogger contact form - anti-spam guard + policy cleanup
    ========================================================= */
 
 .qt-contact-form-mount {
@@ -6598,6 +6598,32 @@ summary:focus-visible,
 
 .qt-contact-form-mount:empty {
   display: none;
+}
+
+/* Simple bot-trap field. Kept off-screen rather than display:none so basic
+   automated form fillers are more likely to touch it. */
+.qt-contact-trap {
+  position: absolute !important;
+  left: -10000px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0.001 !important;
+  pointer-events: none !important;
+}
+
+/*
+ * Blogger must instantiate ContactForm1 globally for its native form
+ * behaviour to initialize correctly. Keep the original gadget hidden,
+ * then reveal it only after it is moved into the Contact page.
+ */
+#ContactForm1 {
+  display: none;
+}
+
+#qt-contact-form-mount #ContactForm1 {
+  display: block;
 }
 
 .widget.ContactForm {
@@ -8249,8 +8275,7 @@ summary:focus-visible,
         </b:includable>
                   </b:widget>
                 
-                  <b:widget cond='data:view.url.canonical contains &quot;/p/contact.html&quot;'
-                            id='ContactForm1'
+                  <b:widget id='ContactForm1'
                             locked='true'
                             title='Contact Form'
                             type='ContactForm'
@@ -8262,12 +8287,22 @@ summary:focus-visible,
                         <h3>Send a message</h3>
                         <p class='qt-contact-form-intro'>
                           Complete the form and Blogger will deliver the message to the blog owner.
-                          Email and message are required.
+                          Email and message are required. Anti-spam checks apply before sending.
                         </p>
 
                         <div class='contact-form-widget'>
                           <div class='form'>
                             <form name='contact-form'>
+
+                              <div aria-hidden='true' class='qt-contact-trap'>
+                                <label for='qt-contact-website'>Website</label>
+                                <input autocomplete='off'
+                                       id='qt-contact-website'
+                                       name='website'
+                                       tabindex='-1'
+                                       type='text'
+                                       value=''/>
+                              </div>
 
                               <div class='qt-contact-field'>
                                 <label expr:for='data:widget.instanceId + &quot;_contact-form-name&quot;'>
@@ -8276,6 +8311,7 @@ summary:focus-visible,
                                 <input autocomplete='name'
                                        class='contact-form-name'
                                        expr:id='data:widget.instanceId + &quot;_contact-form-name&quot;'
+                                       maxlength='100'
                                        name='name'
                                        type='text'
                                        value=''/>
@@ -8288,6 +8324,7 @@ summary:focus-visible,
                                 <input autocomplete='email'
                                        class='contact-form-email'
                                        expr:id='data:widget.instanceId + &quot;_contact-form-email&quot;'
+                                       maxlength='254'
                                        name='email'
                                        type='email'
                                        value=''/>
@@ -8299,6 +8336,7 @@ summary:focus-visible,
                                 </label>
                                 <textarea class='contact-form-email-message'
                                           expr:id='data:widget.instanceId + &quot;_contact-form-email-message&quot;'
+                                          maxlength='5000'
                                           name='email-message'
                                           rows='8'></textarea>
                               </div>
@@ -8309,7 +8347,7 @@ summary:focus-visible,
                                        expr:value='data:contactFormSendMsg'
                                        type='button'/>
                                 <span class='qt-contact-form-note'>
-                                  Please do not include passwords or other highly sensitive information.
+                                  One successful message per browser every five minutes. Please do not include passwords or other highly sensitive information.
                                 </span>
                               </div>
 
@@ -8657,17 +8695,168 @@ summary:focus-visible,
 
     <b:template-script async='true' name='indie' version='1.0.0'/>
 
-    <b:if cond='data:view.url.canonical contains &quot;/p/contact.html&quot;'>
-      <script type='text/javascript'>
-        document.addEventListener('DOMContentLoaded', function () {
+    <script type='text/javascript'>
+      (function () {
+        var cooldownMs = 5 * 60 * 1000;
+        var minimumFillMs = 3000;
+        var storageKey = 'qt_contact_last_success_at';
+
+        function readLastSuccess() {
+          try {
+            return parseInt(window.localStorage.getItem(storageKey) || '0', 10) || 0;
+          } catch (error) {
+            return 0;
+          }
+        }
+
+        function writeLastSuccess(value) {
+          try {
+            window.localStorage.setItem(storageKey, String(value));
+          } catch (error) {
+            /* Local storage may be blocked; the form still remains usable. */
+          }
+        }
+
+        function mountQuestTellerContactForm() {
           var mount = document.getElementById('qt-contact-form-mount');
           var widget = document.getElementById('ContactForm1');
 
-          if (mount &amp;&amp; widget) {
-            mount.appendChild(widget);
+          if (!mount || !widget) {
+            return;
           }
-        });
-      </script>
-    </b:if>
+
+          mount.appendChild(widget);
+
+          var mountedAt = Date.now();
+          var button = widget.querySelector('.contact-form-button-submit');
+          var email = widget.querySelector('.contact-form-email');
+          var message = widget.querySelector('.contact-form-email-message');
+          var trap = widget.querySelector('#qt-contact-website');
+          var errorBox = widget.querySelector('.contact-form-error-message');
+          var successBox = widget.querySelector('.contact-form-success-message');
+          var originalButtonText = button ? button.value : 'Send';
+          var cooldownTimer = null;
+
+          function remainingCooldown() {
+            var elapsed = Date.now() - readLastSuccess();
+            return Math.max(0, cooldownMs - elapsed);
+          }
+
+          function setGuardError(text) {
+            if (successBox) {
+              successBox.textContent = '';
+            }
+            if (errorBox) {
+              errorBox.textContent = text;
+              errorBox.setAttribute('data-qt-guard', 'true');
+            }
+          }
+
+          function clearGuardError() {
+            if (errorBox &amp;&amp; errorBox.getAttribute('data-qt-guard') === 'true') {
+              errorBox.textContent = '';
+              errorBox.removeAttribute('data-qt-guard');
+            }
+          }
+
+          function refreshCooldownUi() {
+            if (!button) {
+              return;
+            }
+
+            var remaining = remainingCooldown();
+
+            if (remaining &gt; 0) {
+              var seconds = Math.ceil(remaining / 1000);
+              var minutes = Math.ceil(seconds / 60);
+              button.disabled = true;
+              button.value = 'Wait ' + minutes + (minutes === 1 ? ' min' : ' mins');
+              setGuardError(
+                'To reduce repeated spam, this browser can send one successful message every five minutes. Please wait before sending again.'
+              );
+
+              if (!cooldownTimer) {
+                cooldownTimer = window.setInterval(refreshCooldownUi, 1000);
+              }
+            } else {
+              button.disabled = false;
+              button.value = originalButtonText;
+              clearGuardError();
+
+              if (cooldownTimer) {
+                window.clearInterval(cooldownTimer);
+                cooldownTimer = null;
+              }
+            }
+          }
+
+          if (button) {
+            button.addEventListener('click', function (event) {
+              if (remainingCooldown() &gt; 0) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                refreshCooldownUi();
+                return;
+              }
+
+              if (Date.now() - mountedAt &lt; minimumFillMs) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                setGuardError('Please wait a few seconds before sending the form.');
+                return;
+              }
+
+              if (trap &amp;&amp; trap.value.trim() !== '') {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                setGuardError('This message could not be sent.');
+                return;
+              }
+
+              if (!email || !email.value.trim() || !email.checkValidity()) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                setGuardError('Please enter a valid email address.');
+                return;
+              }
+
+              if (!message || message.value.trim().length &lt; 10) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                setGuardError('Please enter a message of at least 10 characters.');
+                return;
+              }
+
+              clearGuardError();
+            }, true);
+          }
+
+          if (successBox &amp;&amp; window.MutationObserver) {
+            var successObserver = new MutationObserver(function () {
+              if (successBox.textContent.trim() !== '') {
+                writeLastSuccess(Date.now());
+                refreshCooldownUi();
+              }
+            });
+
+            successObserver.observe(successBox, {
+              childList: true,
+              subtree: true,
+              characterData: true
+            });
+          }
+
+          if (remainingCooldown() &gt; 0) {
+            refreshCooldownUi();
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', mountQuestTellerContactForm);
+        } else {
+          mountQuestTellerContactForm();
+        }
+      }());
+    </script>
   </body>
 </html>
