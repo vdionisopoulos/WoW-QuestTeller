@@ -6189,6 +6189,603 @@ summary:focus-visible,
 }
 
 
+/* =========================================================
+   QUESTTELLER v0.8
+   Contact, privacy, terms and cookie pages
+   ========================================================= */
+
+.qt-policy-page {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--qt-chapter-width);
+  margin: 0 auto;
+  color: var(--qt-text);
+  font-family: var(--qt-font-reading);
+  font-size: 17px;
+  line-height: 1.78;
+}
+
+.qt-policy-page *,
+.qt-policy-page *::before,
+.qt-policy-page *::after {
+  box-sizing: border-box;
+}
+
+.qt-policy-hero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 22px;
+  padding: clamp(28px, 5vw, 48px);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(197, 155, 82, 0.10),
+      transparent 42%
+    ),
+    var(--qt-surface);
+  border: 1px solid var(--qt-border);
+  border-radius: 10px;
+}
+
+.qt-policy-hero h2 {
+  margin: 0;
+  color: var(--qt-heading);
+  font-family: var(--qt-font-display);
+  font-size: clamp(2.35rem, 6vw, 4.6rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.qt-policy-lede {
+  max-width: 780px;
+  margin: 20px 0 0 !important;
+  color: var(--qt-text);
+  font-family: var(--qt-font-reading);
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.qt-policy-meta {
+  margin: 18px 0 0 !important;
+  color: var(--qt-text-muted);
+  font-family: var(--qt-font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.qt-policy-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 16px;
+  background: var(--qt-surface);
+  border: 1px solid var(--qt-border);
+  border-radius: 8px;
+}
+
+.qt-policy-jump a,
+.qt-policy-jump a:visited {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 7px 12px;
+  color: var(--qt-text-muted);
+  font-family: var(--qt-font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid var(--qt-border);
+  border-radius: 999px;
+}
+
+.qt-policy-jump a:hover {
+  color: var(--qt-gold);
+  background: var(--qt-surface-raised);
+  border-color: rgba(197, 155, 82, 0.32);
+}
+
+.qt-policy-section {
+  margin: 0 0 14px;
+  padding: clamp(22px, 4vw, 34px);
+  background: var(--qt-surface);
+  border: 1px solid var(--qt-border);
+  border-radius: 9px;
+}
+
+.qt-policy-section--closing {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(197, 155, 82, 0.06),
+      transparent 54%
+    ),
+    var(--qt-surface);
+  border-color: rgba(197, 155, 82, 0.24);
+}
+
+.qt-policy-section h3,
+.qt-policy-section h4 {
+  color: var(--qt-heading);
+  font-family: var(--qt-font-display);
+}
+
+.qt-policy-section h3 {
+  margin: 2px 0 15px;
+  font-size: clamp(1.35rem, 3.2vw, 1.9rem);
+  line-height: 1.2;
+}
+
+.qt-policy-section h4 {
+  margin: 28px 0 8px;
+  font-size: 1rem;
+  line-height: 1.35;
+  letter-spacing: 0.015em;
+}
+
+.qt-policy-section p {
+  margin: 0 0 1.15em;
+}
+
+.qt-policy-section p:last-child {
+  margin-bottom: 0;
+}
+
+.qt-policy-section a,
+.qt-policy-section a:visited,
+.qt-policy-callout a,
+.qt-policy-callout a:visited {
+  color: var(--qt-gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.qt-policy-section a:hover,
+.qt-policy-callout a:hover {
+  color: var(--qt-heading);
+}
+
+.qt-policy-list {
+  margin: 16px 0 0;
+  padding-left: 22px;
+}
+
+.qt-policy-list li {
+  margin: 8px 0;
+}
+
+.qt-policy-callout {
+  margin: 18px 0;
+  padding: 16px 18px;
+  color: var(--qt-heading);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(197, 155, 82, 0.10),
+      rgba(197, 155, 82, 0.025)
+    );
+  border-left: 3px solid var(--qt-gold);
+  border-radius: 0 7px 7px 0;
+}
+
+.qt-policy-link-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.qt-policy-link-grid > a,
+.qt-policy-link-grid > a:visited {
+  display: block;
+  min-width: 0;
+  padding: 17px;
+  color: var(--qt-text);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid var(--qt-border);
+  border-radius: 7px;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.qt-policy-link-grid > a:hover {
+  transform: translateY(-2px);
+  color: var(--qt-text);
+  background: var(--qt-surface-raised);
+  border-color: rgba(197, 155, 82, 0.30);
+}
+
+.qt-policy-link-grid span,
+.qt-policy-link-grid small {
+  display: block;
+}
+
+.qt-policy-link-grid span {
+  color: var(--qt-heading);
+  font-family: var(--qt-font-display);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.qt-policy-link-grid small {
+  margin-top: 7px;
+  color: var(--qt-text-muted);
+  font-family: var(--qt-font-ui);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.qt-policy-table-wrap {
+  width: 100%;
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--qt-border);
+  border-radius: 8px;
+}
+
+.qt-policy-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  background: #0b0e11;
+}
+
+.qt-policy-table th,
+.qt-policy-table td {
+  padding: 14px 15px;
+  border-bottom: 1px solid var(--qt-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.qt-policy-table th {
+  color: var(--qt-heading);
+  font-family: var(--qt-font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  background: rgba(197, 155, 82, 0.055);
+}
+
+.qt-policy-table td {
+  color: var(--qt-text);
+  font-family: var(--qt-font-reading);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.qt-policy-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.qt-policy-page code {
+  padding: 1px 5px;
+  color: var(--qt-heading);
+  background: #0b0e11;
+  border: 1px solid var(--qt-border);
+  border-radius: 4px;
+}
+
+/* ---------- Footer information/legal navigation ---------- */
+
+#footer .qt-footer-navigation {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+
+#footer .qt-footer-links,
+#footer .qt-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#footer .qt-footer-links {
+  gap: 8px 18px;
+}
+
+#footer .qt-footer-legal {
+  gap: 6px 14px;
+}
+
+#footer .qt-footer-legal a,
+#footer .qt-footer-legal a:visited {
+  color: var(--qt-text-muted);
+  font-family: var(--qt-font-ui);
+  font-size: 9px;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+#footer .qt-footer-legal a:hover {
+  color: var(--qt-gold);
+}
+
+@media screen and (max-width: 900px) {
+  #footer .qt-footer-content {
+    justify-content: center;
+  }
+
+  #footer .qt-footer-navigation {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .qt-policy-link-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .qt-policy-page {
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .qt-policy-hero {
+    padding: 25px 20px;
+    border-radius: 8px;
+  }
+
+  .qt-policy-section {
+    padding: 22px 18px;
+    border-radius: 8px;
+  }
+
+  .qt-policy-jump {
+    padding: 12px;
+  }
+
+  .qt-policy-jump a {
+    min-height: 44px;
+  }
+
+  #footer .qt-footer-navigation {
+    width: 100%;
+  }
+
+  #footer .qt-footer-links,
+  #footer .qt-footer-legal {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #footer .qt-footer-links,
+  #footer .qt-footer-legal {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #footer .qt-footer-links a,
+  #footer .qt-footer-legal a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+  }
+}
+
+/* =========================================================
+   QUESTTELLER v0.9
+   Native Blogger contact form
+   ========================================================= */
+
+.qt-contact-form-mount {
+  margin: 20px 0;
+}
+
+.qt-contact-form-mount:empty {
+  display: none;
+}
+
+.widget.ContactForm {
+  margin: 0 !important;
+}
+
+.widget.ContactForm .qt-contact-form-card {
+  padding: clamp(20px, 4vw, 28px);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(197, 155, 82, 0.055),
+      transparent 48%
+    ),
+    #0b0e11;
+  border: 1px solid var(--qt-border);
+  border-radius: 8px;
+}
+
+.widget.ContactForm .qt-contact-form-card h3 {
+  margin: 0;
+  color: var(--qt-heading);
+  font-family: var(--qt-font-display);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  line-height: 1.2;
+}
+
+.qt-contact-form-intro {
+  margin: 10px 0 22px !important;
+  color: var(--qt-text-muted);
+  font-family: var(--qt-font-reading);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.widget.ContactForm form {
+  display: grid;
+  gap: 16px;
+}
+
+.qt-contact-field {
+  display: grid;
+  gap: 7px;
+}
+
+.qt-contact-field label {
+  color: var(--qt-heading);
+  font-family: var(--qt-font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.qt-contact-required {
+  color: var(--qt-gold);
+}
+
+.widget.ContactForm .contact-form-name,
+.widget.ContactForm .contact-form-email,
+.widget.ContactForm .contact-form-email-message {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 12px 13px;
+  color: var(--qt-heading);
+  font-family: var(--qt-font-ui);
+  font-size: 16px;
+  line-height: 1.45;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--qt-border);
+  border-radius: 7px;
+  outline: 0;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.widget.ContactForm .contact-form-email-message {
+  min-height: 180px;
+  resize: vertical;
+  font-family: var(--qt-font-reading);
+}
+
+.widget.ContactForm .contact-form-name:focus,
+.widget.ContactForm .contact-form-email:focus,
+.widget.ContactForm .contact-form-email-message:focus {
+  background: var(--qt-surface-raised);
+  border-color: rgba(197, 155, 82, 0.62);
+  box-shadow: 0 0 0 3px rgba(197, 155, 82, 0.08);
+}
+
+.qt-contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 2px;
+}
+
+.widget.ContactForm .contact-form-button-submit {
+  min-height: 44px;
+  padding: 11px 20px;
+  color: #0a0c0e;
+  font-family: var(--qt-font-ui);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  background: var(--qt-gold);
+  border: 1px solid var(--qt-gold);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.widget.ContactForm .contact-form-button-submit:hover {
+  transform: translateY(-1px);
+  color: #0a0c0e;
+  background: var(--qt-heading);
+  border-color: var(--qt-heading);
+}
+
+.widget.ContactForm .contact-form-button-submit:focus-visible {
+  outline: 2px solid var(--qt-gold);
+  outline-offset: 4px;
+}
+
+.qt-contact-form-note {
+  color: var(--qt-text-muted);
+  font-family: var(--qt-font-ui);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.qt-contact-status {
+  min-height: 22px;
+}
+
+.widget.ContactForm .contact-form-error-message,
+.widget.ContactForm .contact-form-success-message {
+  margin: 0;
+  padding: 10px 12px;
+  font-family: var(--qt-font-ui);
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 6px;
+}
+
+.widget.ContactForm .contact-form-error-message:not(:empty) {
+  color: #f1c0bc;
+  background: rgba(160, 55, 47, 0.16);
+  border: 1px solid rgba(201, 87, 77, 0.28);
+}
+
+.widget.ContactForm .contact-form-success-message:not(:empty) {
+  color: #c8dfb7;
+  background: rgba(91, 130, 65, 0.16);
+  border: 1px solid rgba(123, 159, 88, 0.30);
+}
+
+.qt-contact-email-fallback {
+  margin-top: 18px;
+}
+
+@media screen and (max-width: 700px) {
+  .widget.ContactForm .qt-contact-form-card {
+    padding: 20px 16px;
+  }
+
+  .qt-contact-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .widget.ContactForm .contact-form-button-submit {
+    width: 100%;
+  }
+}
+
 ]]></b:skin>
 
     <b:template-skin>
@@ -7651,7 +8248,85 @@ summary:focus-visible,
           </div>
         </b:includable>
                   </b:widget>
-                </b:section>
+                
+                  <b:widget cond='data:view.url.canonical contains &quot;/p/contact.html&quot;'
+                            id='ContactForm1'
+                            locked='true'
+                            title='Contact Form'
+                            type='ContactForm'
+                            version='1'
+                            visible='true'>
+                    <b:includable id='main'>
+                      <div class='qt-contact-form-card'>
+                        <div class='qt-section-kicker'>Write to the Chronicle</div>
+                        <h3>Send a message</h3>
+                        <p class='qt-contact-form-intro'>
+                          Complete the form and Blogger will deliver the message to the blog owner.
+                          Email and message are required.
+                        </p>
+
+                        <div class='contact-form-widget'>
+                          <div class='form'>
+                            <form name='contact-form'>
+
+                              <div class='qt-contact-field'>
+                                <label expr:for='data:widget.instanceId + &quot;_contact-form-name&quot;'>
+                                  Name
+                                </label>
+                                <input autocomplete='name'
+                                       class='contact-form-name'
+                                       expr:id='data:widget.instanceId + &quot;_contact-form-name&quot;'
+                                       name='name'
+                                       type='text'
+                                       value=''/>
+                              </div>
+
+                              <div class='qt-contact-field'>
+                                <label expr:for='data:widget.instanceId + &quot;_contact-form-email&quot;'>
+                                  Email <span class='qt-contact-required' aria-hidden='true'>*</span>
+                                </label>
+                                <input autocomplete='email'
+                                       class='contact-form-email'
+                                       expr:id='data:widget.instanceId + &quot;_contact-form-email&quot;'
+                                       name='email'
+                                       type='email'
+                                       value=''/>
+                              </div>
+
+                              <div class='qt-contact-field'>
+                                <label expr:for='data:widget.instanceId + &quot;_contact-form-email-message&quot;'>
+                                  Message <span class='qt-contact-required' aria-hidden='true'>*</span>
+                                </label>
+                                <textarea class='contact-form-email-message'
+                                          expr:id='data:widget.instanceId + &quot;_contact-form-email-message&quot;'
+                                          name='email-message'
+                                          rows='8'></textarea>
+                              </div>
+
+                              <div class='qt-contact-actions'>
+                                <input class='contact-form-button contact-form-button-submit'
+                                       expr:id='data:widget.instanceId + &quot;_contact-form-submit&quot;'
+                                       expr:value='data:contactFormSendMsg'
+                                       type='button'/>
+                                <span class='qt-contact-form-note'>
+                                  Please do not include passwords or other highly sensitive information.
+                                </span>
+                              </div>
+
+                              <div aria-live='polite' class='qt-contact-status' role='status'>
+                                <p class='contact-form-error-message'
+                                   expr:id='data:widget.instanceId + &quot;_contact-form-error-message&quot;'/>
+                                <p class='contact-form-success-message'
+                                   expr:id='data:widget.instanceId + &quot;_contact-form-success-message&quot;'/>
+                              </div>
+
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </b:includable>
+                  </b:widget>
+</b:section>
 
                 <b:if cond='data:view.isHomepage'>
                   <section aria-labelledby='qt-explore-title' class='qt-home-explore'>
@@ -7724,13 +8399,24 @@ summary:focus-visible,
       <div class='qt-footer-tagline'>Chronicles of the Forsaken</div>
     </div>
 
-    <nav aria-label='Footer navigation' class='qt-footer-links'>
-      <a expr:href='data:blog.homepageUrl'>Home</a>
-      <a expr:href='data:blog.homepageUrl + &quot;search/label/Story&quot;'>Chronicles</a>
-      <a expr:href='data:blog.homepageUrl + &quot;p/journey.html&quot;'>Journey</a>
-      <a expr:href='data:blog.homepageUrl + &quot;p/about-alisander.html&quot;'>About</a>
-      <a expr:href='data:blog.homepageUrl + &quot;search/label/Gameplay&quot;'>Gameplay</a>
-    </nav>
+    <div class='qt-footer-navigation'>
+
+      <nav aria-label='Footer navigation' class='qt-footer-links'>
+        <a expr:href='data:blog.homepageUrl'>Home</a>
+        <a expr:href='data:blog.homepageUrl + &quot;search/label/Story&quot;'>Chronicles</a>
+        <a expr:href='data:blog.homepageUrl + &quot;p/journey.html&quot;'>Journey</a>
+        <a expr:href='data:blog.homepageUrl + &quot;p/about-alisander.html&quot;'>About</a>
+        <a expr:href='data:blog.homepageUrl + &quot;search/label/Gameplay&quot;'>Gameplay</a>
+      </nav>
+
+      <nav aria-label='Site information' class='qt-footer-legal'>
+        <a expr:href='data:blog.homepageUrl + &quot;p/contact.html&quot;'>Contact</a>
+        <a expr:href='data:blog.homepageUrl + &quot;p/privacy-policy.html&quot;'>Privacy Policy</a>
+        <a expr:href='data:blog.homepageUrl + &quot;p/terms-conditions.html&quot;'>Terms &amp; Conditions</a>
+        <a expr:href='data:blog.homepageUrl + &quot;p/cookie-policy.html&quot;'>Cookie Policy</a>
+      </nav>
+
+    </div>
 
     <div class='qt-footer-platform'>
       <span>A Forsaken mage's chronicle through Azeroth.</span>
@@ -7970,5 +8656,18 @@ summary:focus-visible,
     </aside>
 
     <b:template-script async='true' name='indie' version='1.0.0'/>
+
+    <b:if cond='data:view.url.canonical contains &quot;/p/contact.html&quot;'>
+      <script type='text/javascript'>
+        document.addEventListener('DOMContentLoaded', function () {
+          var mount = document.getElementById('qt-contact-form-mount');
+          var widget = document.getElementById('ContactForm1');
+
+          if (mount &amp;&amp; widget) {
+            mount.appendChild(widget);
+          }
+        });
+      </script>
+    </b:if>
   </body>
 </html>
