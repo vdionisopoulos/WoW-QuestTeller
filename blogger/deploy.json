@@ -1,0 +1,53 @@
+{
+  "blog_url": "https://alisanderchronicles.blogspot.com/",
+  "resources": [
+    {
+      "type": "post",
+      "id": "8399893918958984202",
+      "path": "content/chronicles/alisander/chapter-01-shadow-grave.html",
+      "title": "Alisander — Chapter I: The Shadow Grave"
+    },
+    {
+      "type": "post",
+      "id": "6413612981117687176",
+      "path": "content/chronicles/alisander/chapter-02-those-that-couldnt-be-saved.html",
+      "title": "Alisander — Chapter II: Those That Couldn’t Be Saved"
+    },
+    {
+      "type": "post",
+      "id": "4717631665325725291",
+      "path": "content/chronicles/alisander/chapter-03-the-wakening.html",
+      "title": "The Wakening — Chronicles of the Forsaken: Chapter III"
+    },
+    {
+      "type": "post",
+      "id": "7739075463794653337",
+      "path": "content/chronicles/alisander/chapter-04-the-recruitment.html",
+      "title": "Alisander — Chapter IV: Recruitment"
+    },
+    {
+      "type": "post",
+      "id": "3622022059615951706",
+      "path": "content/chronicles/alisander/chapter-05-scourge-on-our-perimeter.html",
+      "title": "Alisander — Chapter V: Scourge on Our Perimeter"
+    },
+    {
+      "type": "post",
+      "id": "7198637497706308789",
+      "path": "content/chronicles/alisander/chapter-06-the-truth-of-the-grave.html",
+      "title": "Alisander — Chapter VI: The Truth of the Grave"
+    },
+    {
+      "type": "page",
+      "id": "8837810649327911971",
+      "path": "content/pages/about-alisander.html",
+      "title": "About Alisander"
+    },
+    {
+      "type": "page",
+      "id": "7366892167169696382",
+      "path": "content/pages/journey.html",
+      "title": "journey"
+    }
+  ]
+}
