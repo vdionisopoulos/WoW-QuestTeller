@@ -48,6 +48,30 @@
       "id": "7366892167169696382",
       "path": "content/pages/journey.html",
       "title": "journey"
+    },
+    {
+      "type": "page",
+      "id": "5770032913377563871",
+      "path": "content/pages/contact.html",
+      "title": "Contact"
+    },
+    {
+      "type": "page",
+      "id": "6072633811156844572",
+      "path": "content/pages/privacy-policy.html",
+      "title": "Privacy Policy"
+    },
+    {
+      "type": "page",
+      "id": "4152594205007883690",
+      "path": "content/pages/terms-and-conditions.html",
+      "title": "Terms & Conditions"
+    },
+    {
+      "type": "page",
+      "id": "391460620321713396",
+      "path": "content/pages/cookie-policy.html",
+      "title": "Cookie Policy"
     }
   ]
 }
