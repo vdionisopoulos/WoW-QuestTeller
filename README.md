@@ -7,7 +7,7 @@ chapters, and static pages.
 ## Repository layout
 
 - `blogger/theme/questteller.xml` — deployable Blogger theme.
-- `blogger/deploy.json` — exact mapping between local source files and live Blogger titles.
+- `blogger/deploy.json` — stable mapping between local source files and live Blogger resource IDs.
 - `content/chronicles/alisander/` — Chronicle chapter HTML.
 - `content/pages/` — Blogger static-page HTML.
 - `tools/validate_repo.py` — local/CI validation.

@@ -138,48 +138,112 @@ def validate_manifest(errors: list[str]) -> None:
         return
 
     blog_url = data.get("blog_url", "")
-    if not isinstance(blog_url, str) or not blog_url.startswith(("http://", "https://")):
-        fail(errors, "blogger/deploy.json must contain a valid blog_url.")
+    if not isinstance(blog_url, str) or not blog_url.startswith(
+        ("http://", "https://")
+    ):
+        fail(
+            errors,
+            "blogger/deploy.json must contain a valid blog_url.",
+        )
 
     resources = data.get("resources")
+
     if not isinstance(resources, list) or not resources:
-        fail(errors, "blogger/deploy.json must contain a non-empty resources list.")
+        fail(
+            errors,
+            "blogger/deploy.json must contain a non-empty resources list.",
+        )
         return
 
-    seen_keys: set[tuple[str, str]] = set()
     seen_paths: set[str] = set()
+    seen_ids: set[tuple[str, str]] = set()
+
     for item in resources:
         if not isinstance(item, dict):
-            fail(errors, f"Manifest resource is not an object: {item!r}")
+            fail(
+                errors,
+                f"Manifest resource is not an object: {item!r}",
+            )
             continue
+
         kind = item.get("type")
         rel = item.get("path")
         title = item.get("title")
-        if kind not in {"post", "page"}:
-            fail(errors, f"Invalid manifest resource type for {rel!r}: {kind!r}")
-        if not isinstance(rel, str) or not rel:
-            fail(errors, "Manifest resource has an empty path.")
-            continue
-        if not isinstance(title, str) or not title.strip():
-            fail(errors, f"Manifest resource has an empty title: {rel}")
-        path = ROOT / rel
-        if not path.is_file():
-            fail(errors, f"Manifest path does not exist: {rel}")
-        if rel in seen_paths:
-            fail(errors, f"Duplicate manifest path: {rel}")
-        seen_paths.add(rel)
-        key = (str(kind), str(title))
-        if key in seen_keys:
-            fail(errors, f"Duplicate manifest remote key: {kind} / {title}")
-        seen_keys.add(key)
+        resource_id = item.get("id")
 
-    expected = {str(p.relative_to(ROOT)).replace("\\", "/") for p in content_files()}
+        if kind not in {"post", "page"}:
+            fail(
+                errors,
+                f"Invalid manifest resource type for {rel!r}: {kind!r}",
+            )
+
+        if not isinstance(rel, str) or not rel:
+            fail(
+                errors,
+                "Manifest resource has an empty path.",
+            )
+            continue
+
+        if not isinstance(title, str) or not title.strip():
+            fail(
+                errors,
+                f"Manifest resource has an empty title: {rel}",
+            )
+
+        if not isinstance(resource_id, str) or not resource_id.isdigit():
+            fail(
+                errors,
+                f"Manifest resource has invalid Blogger id: {rel}",
+            )
+        else:
+            remote_key = (str(kind), resource_id)
+
+            if remote_key in seen_ids:
+                fail(
+                    errors,
+                    f"Duplicate Blogger resource id: "
+                    f"{kind} / {resource_id}",
+                )
+
+            seen_ids.add(remote_key)
+
+        path = ROOT / rel
+
+        if not path.is_file():
+            fail(
+                errors,
+                f"Manifest path does not exist: {rel}",
+            )
+
+        if rel in seen_paths:
+            fail(
+                errors,
+                f"Duplicate manifest path: {rel}",
+            )
+
+        seen_paths.add(rel)
+
+    expected = {
+        str(path.relative_to(ROOT)).replace("\\", "/")
+        for path in content_files()
+    }
+
     missing = expected - seen_paths
     extra = seen_paths - expected
+
     if missing:
-        fail(errors, "Managed content missing from deploy manifest: " + ", ".join(sorted(missing)))
+        fail(
+            errors,
+            "Managed content missing from deploy manifest: "
+            + ", ".join(sorted(missing)),
+        )
+
     if extra:
-        fail(errors, "Deploy manifest contains non-managed paths: " + ", ".join(sorted(extra)))
+        fail(
+            errors,
+            "Deploy manifest contains non-managed paths: "
+            + ", ".join(sorted(extra)),
+        )
 
 
 def main() -> int:
