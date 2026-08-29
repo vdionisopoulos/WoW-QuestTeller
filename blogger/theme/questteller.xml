@@ -6,6 +6,20 @@
     <title><data:view.title.escaped/></title>
     <b:include data='blog' name='all-head-content'/>
 
+    <!-- Google Analytics 4 -->
+    <script async='async' src='https://www.googletagmanager.com/gtag/js?id=G-E30L3KX1H9'></script>
+    <script type='text/javascript'>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-E30L3KX1H9');
+    </script>
+
+    <!-- QuestTeller typography -->
+    <link href='https://fonts.googleapis.com' rel='preconnect'/>
+    <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+    <link href='https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&amp;display=swap' rel='stylesheet'/>
+
     <b:skin version='1.3.3'><![CDATA[/*! normalize.css v3.0.1 | MIT License | git.io/normalize */html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
 /*
 <!-- Constants -->
@@ -3115,7 +3129,10 @@ body.item-view .centered-top {
 .qt-featured-image {
   position: relative;
 
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
 
   overflow: hidden;
@@ -3129,8 +3146,8 @@ body.item-view .centered-top {
   width: 100%;
   height: auto;
 
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
 
   transition: transform 500ms ease;
 }
@@ -5041,6 +5058,10 @@ body.item-view .qt-page-header .post-title {
     grid-template-columns: 1fr;
     gap: 7px;
   }
+
+  .qt-chapter-closing {
+  text-align: center;
+}
 }
 
 @media screen and (max-width: 520px) {
@@ -5513,6 +5534,657 @@ body.item-view .qt-page-header .post-title {
   }
 }
 
+
+
+/* =========================================================
+   QUESTTELLER v0.7
+   Typography, accessibility, archive repair and responsive UI
+   This final layer intentionally overrides earlier incremental rules.
+   ========================================================= */
+
+:root {
+  --qt-font-display: "Cinzel", Georgia, "Times New Roman", serif;
+  --qt-font-reading: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --qt-font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ---------- Resilient global sizing ---------- */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: var(--qt-font-ui);
+}
+
+img,
+svg,
+video,
+canvas,
+iframe,
+embed,
+object {
+  max-width: 100%;
+}
+
+.qt-header-inner,
+.page_body .centered,
+.centered-bottom,
+.qt-single-post,
+.qt-page-post,
+.qt-chapter-reading,
+.qt-journey-page,
+.qt-about-page {
+  min-width: 0;
+}
+
+.qt-journey-overview-grid > *,
+.qt-home-about > *,
+.qt-about-hero > *,
+.qt-about-background > *,
+.qt-chapter-card > *,
+.qt-world-grid > *,
+.qt-rpg-identity > *,
+.qt-ability-grid > *,
+.qt-rpg-columns > * {
+  min-width: 0;
+}
+
+/* ---------- Typography ---------- */
+
+.post-body,
+.qt-chapter-reading .post-body,
+.qt-featured-summary,
+.qt-chapter-card-summary,
+.qt-journey-overview-copy p,
+.qt-home-about-copy p,
+.qt-chronicles-hero p,
+.qt-about-lede,
+.qt-roadmap-copy span,
+.qt-journey-hero p,
+.qt-journey-section > p,
+.qt-world-card p,
+.qt-arc-copy span,
+.qt-memory-fragments li,
+.qt-rpg-panel li,
+.qt-chapter-nav-current,
+.qt-quote {
+  font-family: var(--qt-font-reading);
+}
+
+.qt-brand-name,
+.qt-featured-title,
+.qt-chapter-card-title,
+body.item-view .qt-chapter-header .post-title,
+.qt-chapter-reading h2,
+.qt-page-header .post-title,
+.qt-about-name,
+.qt-about-section h2,
+.qt-journey-overview-copy h2,
+.qt-home-explore h2,
+.qt-home-about h2,
+.qt-chronicles-hero h1,
+.qt-journey-hero h2,
+.qt-journey-section h2 {
+  font-family: var(--qt-font-display);
+}
+
+.qt-chapter-reading .post-body > p:first-of-type::first-letter {
+  font-family: var(--qt-font-display);
+}
+
+/* Keep small UI text crisp and compact. */
+.qt-featured-kicker,
+.qt-chapter-card-kicker,
+.qt-section-kicker,
+.qt-chapter-kicker,
+.qt-chapter-meta,
+.qt-location,
+.qt-art figcaption,
+.qt-primary-link,
+.qt-secondary-link,
+.qt-main-nav,
+.qt-header-search,
+.qt-chapter-nav-direction,
+.qt-chapter-nav-home,
+.qt-chapter-nav-kicker,
+.qt-journey-location,
+.qt-journey-stat-label,
+.qt-world-state,
+.qt-arc-number,
+.qt-arc-status,
+.qt-rpg-disclaimer,
+.qt-rpg-field span,
+.qt-ability-name,
+.qt-rpg-panel h3 {
+  font-family: var(--qt-font-ui);
+}
+
+/* ---------- Correct chapter closing utility ---------- */
+
+.qt-chapter-closing {
+  text-align: center;
+}
+
+/* ---------- Archive post count ---------- */
+
+.BlogArchive .post-count {
+  float: none;
+  display: inline-block;
+  margin-left: 0.35em;
+  margin-right: 0;
+  color: var(--qt-text-muted);
+}
+
+.BlogArchive .post-count::before {
+  content: "(";
+}
+
+.BlogArchive .post-count::after {
+  content: ")";
+}
+
+/* ---------- Accessible focus treatment ---------- */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--qt-gold);
+  outline-offset: 4px;
+}
+
+.qt-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ---------- Custom header search ---------- */
+
+.qt-header-search {
+  display: flex;
+  align-items: center;
+  flex: 0 1 230px;
+  min-width: 180px;
+  height: 42px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--qt-border);
+  border-radius: 999px;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.qt-header-search:focus-within {
+  background: var(--qt-surface-raised);
+  border-color: rgba(197, 155, 82, 0.58);
+}
+
+.qt-header-search input {
+  min-width: 0;
+  flex: 1 1 auto;
+  height: 100%;
+  padding: 0 4px 0 15px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--qt-heading);
+  font-family: var(--qt-font-ui);
+  font-size: 13px;
+}
+
+.qt-header-search input::placeholder {
+  color: var(--qt-text-muted);
+  opacity: 0.8;
+}
+
+.qt-header-search button {
+  flex: 0 0 auto;
+  height: 100%;
+  padding: 0 14px;
+  background: transparent;
+  border: 0;
+  border-left: 1px solid var(--qt-border);
+  color: var(--qt-gold);
+  font-family: var(--qt-font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.qt-header-search button:hover {
+  background: rgba(197, 155, 82, 0.08);
+  color: var(--qt-heading);
+}
+
+/* ---------- General responsive primitives ---------- */
+
+.qt-main-nav a,
+.qt-primary-link,
+.qt-secondary-link,
+.qt-read-chapter,
+.qt-chapter-card-link,
+.qt-chapter-nav-card,
+.qt-chapter-nav-home,
+.qt-header-search button {
+  touch-action: manipulation;
+}
+
+.qt-main-nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qt-featured-image img,
+.qt-chapter-card-image img,
+.qt-home-about-art img,
+.qt-about-portrait img,
+.qt-art img {
+  max-width: 100%;
+}
+
+/* ---------- Large tablets / small laptops ---------- */
+
+@media screen and (max-width: 1100px) {
+  .page_body .centered {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .qt-header-inner {
+    flex-wrap: wrap;
+    gap: 14px 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .qt-brand {
+    flex: 1 1 auto;
+  }
+
+  .qt-main-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    border-top: 1px solid var(--qt-border);
+    padding-top: 8px;
+  }
+
+  .qt-header-search {
+    flex: 0 1 250px;
+  }
+
+  .qt-featured-content {
+    padding: 34px 36px 38px;
+  }
+
+  .qt-journey-overview-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+    gap: 26px;
+  }
+
+  .qt-home-about,
+  .qt-about-hero {
+    gap: 28px;
+  }
+
+  .qt-chapter-card {
+    grid-template-columns: minmax(230px, 42%) minmax(0, 1fr);
+  }
+}
+
+/* ---------- Portrait tablets ---------- */
+
+@media screen and (max-width: 900px) {
+  .qt-journey-overview-grid,
+  .qt-home-about,
+  .qt-about-hero,
+  .qt-about-background {
+    grid-template-columns: 1fr;
+  }
+
+  .qt-home-about-art,
+  .qt-about-portrait {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .qt-about-portrait img {
+    aspect-ratio: 16 / 10;
+    object-position: 50% 20%;
+  }
+
+  .qt-journey-stats,
+  .qt-character-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .qt-world-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .qt-rpg-identity {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .qt-ability-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .qt-rpg-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .qt-footer-content,
+  #footer .qt-footer-content {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- Phones / compact tablets ---------- */
+
+@media screen and (max-width: 700px) {
+  .page_body .centered {
+    padding: 10px 10px 48px;
+  }
+
+  .centered-bottom {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .qt-header-inner {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .qt-brand {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .qt-main-nav {
+    order: 2;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: 4px;
+    padding-top: 8px;
+  }
+
+  .qt-main-nav a {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 5px;
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .qt-header-search {
+    order: 3;
+    width: 100%;
+    min-width: 0;
+    flex-basis: 42px;
+  }
+
+  .qt-featured-chapter,
+  .qt-journey-overview,
+  .qt-home-about,
+  .qt-chronicles-hero,
+  .qt-journey-hero,
+  .qt-rpg-sheet {
+    border-radius: 8px;
+  }
+
+  .qt-featured-content {
+    padding: 26px 20px 30px;
+  }
+
+  .qt-featured-title {
+    font-size: clamp(1.9rem, 9vw, 2.7rem);
+    line-height: 1.05;
+  }
+
+  .qt-chapter-card {
+    grid-template-columns: 1fr;
+  }
+
+  .qt-chapter-card-image,
+  .qt-chapter-card-image img {
+    min-height: 0;
+  }
+
+  .qt-chapter-card-image img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .qt-chapter-card-content {
+    padding: 22px 20px 26px;
+  }
+
+  body.item-view .qt-chapter-header,
+  .qt-page-header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  body.item-view .qt-chapter-header .post-title,
+  body.item-view .qt-page-header .post-title {
+    font-size: clamp(2.15rem, 11vw, 3.7rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    overflow-wrap: anywhere;
+  }
+
+  .qt-chapter-reading .post-body {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 17px;
+    line-height: 1.78;
+  }
+
+  .qt-chapter-reading h2 {
+    font-size: clamp(1.55rem, 7vw, 2.15rem);
+  }
+
+  .qt-art,
+  .qt-art-wide,
+  .qt-art-full {
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+  }
+
+  .qt-quote {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 24px 18px;
+    font-size: clamp(1.25rem, 6vw, 1.75rem);
+  }
+
+  .qt-divider::before,
+  .qt-divider::after {
+    width: min(72px, 22vw);
+  }
+
+  .qt-chapter-nav {
+    width: calc(100% - 32px);
+  }
+
+  .qt-chapter-nav-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qt-chapter-nav-prev,
+  .qt-chapter-nav-next {
+    text-align: left;
+  }
+
+  .qt-chapter-nav-home {
+    order: 3;
+    justify-self: center;
+  }
+
+  .qt-journey-overview,
+  .qt-chronicles-hero,
+  .qt-journey-hero {
+    padding: 24px 20px;
+  }
+
+  .qt-journey-current-banner,
+  .qt-arc,
+  .qt-roadmap-item {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .qt-explore-grid,
+  .qt-world-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qt-home-about {
+    padding: 18px;
+  }
+
+  .qt-home-about-art img,
+  .qt-about-portrait img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .qt-rpg-sheet {
+    padding: 20px 16px;
+  }
+
+  body.item-view #comments,
+  body.item-view .qt-chapter-footer {
+    width: calc(100% - 32px);
+  }
+
+  #footer {
+    width: calc(100% - 20px);
+    margin-top: 44px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #footer .qt-footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .qt-footer-brand,
+  .qt-footer-platform {
+    text-align: center;
+  }
+}
+
+/* ---------- Small phones ---------- */
+
+@media screen and (max-width: 480px) {
+  .qt-brand-mark.qt-brand-portrait {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+  }
+
+  .qt-brand-name {
+    font-size: 18px;
+  }
+
+  .qt-brand-tagline {
+    font-size: 9px;
+  }
+
+  .qt-main-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .qt-header-search input {
+    font-size: 16px; /* prevents iOS zoom on focus */
+  }
+
+  .qt-journey-stats,
+  .qt-character-grid,
+  .qt-rpg-identity,
+  .qt-ability-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qt-journey-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .qt-primary-link,
+  .qt-secondary-link {
+    min-height: 44px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .qt-featured-content,
+  .qt-chapter-card-content {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .qt-about-name {
+    font-size: clamp(2.2rem, 13vw, 3.5rem);
+  }
+
+  .qt-about-lede {
+    font-size: 17px;
+  }
+
+  .qt-level-card,
+  .qt-memory-fragments,
+  .qt-rpg-panel {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
 ]]></b:skin>
 
     <b:template-skin>
@@ -5814,7 +6486,11 @@ body.item-view .qt-page-header .post-title {
     <b:if cond='(data:widgets.AdSense.first or data:blog.adsenseClientId) and not data:blog.adsenseAutoAds'>
       <script async='async' src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'/>
     </b:if>
-    <b:include data='blog' name='google-analytics'/>
+    <!--
+      Google Analytics is loaded explicitly above with GA4 measurement ID
+      G-E30L3KX1H9. The native Blogger analytics include is intentionally
+      disabled here to avoid possible duplicate page_view events.
+    -->
 
     <script async='async' src='https://www.gstatic.com/external_hosted/clipboardjs/clipboard.min.js'/>
   </head>
@@ -5877,6 +6553,13 @@ body.item-view .qt-page-header .post-title {
       </a>
 
     </nav>
+
+    <form class='qt-header-search' expr:action='data:blog.searchUrl' role='search'>
+      <b:attr cond='not data:view.isPreview' name='target' value='_top'/>
+      <label class='qt-visually-hidden' for='qt-header-search-input'>Search the chronicles</label>
+      <input autocomplete='off' id='qt-header-search-input' name='q' placeholder='Search chronicles…' type='search'/>
+      <button type='submit'>Search</button>
+    </form>
 
   </div>
 
@@ -6137,7 +6820,7 @@ body.item-view .qt-page-header .post-title {
                         </div>
                         <div class='qt-journey-stat'>
                           <span class='qt-journey-stat-label'>Chronicle</span>
-                          <strong>2 Chapters</strong>
+                          <strong>6 Chapters</strong>
                         </div>
                         <div class='qt-journey-stat'>
                           <span class='qt-journey-stat-label'>Path</span>
@@ -6237,13 +6920,16 @@ body.item-view .qt-page-header .post-title {
   <article class='qt-featured-chapter'>
 
     <b:if cond='data:post.featuredImage'>
-      <a class='qt-featured-image' expr:href='data:post.url' expr:aria-label='data:post.title'>
-        <b:include data='{
-          image: data:post.featuredImage,
-          imageSizes: [480, 720, 960, 1200, 1600],
-          imageRatio: &quot;16:9&quot;,
-          sourceSizes: &quot;(min-width: 1180px) 1130px, calc(100vw - 48px)&quot;
-        }' name='responsiveImage'/>
+      <a class='qt-featured-image'
+        expr:href='data:post.url'
+        expr:aria-label='data:post.title'>
+
+        <img
+          expr:src='resizeImage(data:post.featuredImage, 1600)'
+          expr:alt='data:post.title'
+          loading='eager'
+          decoding='async'/>
+
       </a>
     </b:if>
 
